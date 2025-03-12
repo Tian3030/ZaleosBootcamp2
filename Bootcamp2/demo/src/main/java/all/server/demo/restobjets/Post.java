@@ -1,4 +1,4 @@
-package all.server.demo.service.restobjects;
+package all.server.demo.restobjets;
 
 import java.util.ArrayList;
 
