@@ -57,7 +57,7 @@ public class UsersController {
         userRepo.deleteById(username);
     }
 
-    @PutMapping
+    @PutMapping("/{username}")
     public User editUser(@PathVariable String username, @RequestBody User userNew) {
 
         if(!userNew.getUsername().equals(username))
