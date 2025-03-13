@@ -3,8 +3,12 @@ package all.server.demo.controller;
 import all.server.demo.repositories.UserRepository;
 import all.server.demo.restobjets.User;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.List;
 
@@ -22,13 +26,13 @@ public class UsersController {
     @PostMapping
     public User createUser (@RequestBody User user){
         if(userRepo.existsById(user.getUsername()))
-            throw new IllegalArgumentException("Username already exists");
+           throw new IllegalArgumentException("ERROR 400: Username already exists");
 
         else if(user.getUsername().length() < 4)
-            throw new IllegalArgumentException("Username too short");
+            throw new IllegalArgumentException("ERROR 400: Username too short");
 
         else if(user.getName().length() < 4)
-            throw new IllegalArgumentException("Name too short");
+            throw new IllegalArgumentException("ERROR 400: Name too short");
 
         else
             return userRepo.save(user);
@@ -36,7 +40,7 @@ public class UsersController {
 
     @GetMapping("/{username}")
     public User getUser (@PathVariable String username){
-        return userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 400: User not found"));
     }
 
     @GetMapping
@@ -48,7 +52,7 @@ public class UsersController {
     public void deleteUser (@PathVariable String username){
 
         if(!userRepo.existsById(username))
-            throw new IllegalArgumentException("User does not exist");
+            throw new IllegalArgumentException("ERROR 400: User does not exist");
 
         userRepo.deleteById(username);
     }
@@ -56,11 +60,11 @@ public class UsersController {
     @PatchMapping("/{username}")
     public User editName (@PathVariable String username, @RequestBody User userNew){
 
-        User userOld = userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User userOld = userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 400: User not found"));
 
         if(userNew.getName() != null) {
             if (userNew.getName() == null || userNew.getName().isBlank())
-                throw new IllegalArgumentException("Unable to modify the users name, please provide a valid name");
+                throw new IllegalArgumentException("ERROR 400: Unable to modify the users name, please provide a valid name");
             userOld.setName(userNew.getName());
         }
 
