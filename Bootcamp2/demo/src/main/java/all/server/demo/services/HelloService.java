@@ -1,4 +1,4 @@
-package all.server.demo.controller;
+package all.server.demo.services;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
