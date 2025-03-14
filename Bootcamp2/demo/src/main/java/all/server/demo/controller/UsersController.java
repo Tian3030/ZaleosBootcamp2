@@ -59,16 +59,23 @@ public class UsersController {
 
     @PutMapping("/{username}")
     public User editUser(@PathVariable String username, @RequestBody User userNew) {
-
-        if(!userNew.getUsername().equals(username))
+        System.out.println("ENTRO A PUT");
+        if(!userNew.getUsername().equals(username)) {
+            System.out.println("1");
             throw new IllegalArgumentException("ERROR 400: Username missmatch");
+        }
 
-        if(userRepo.existsById(userNew.getUsername()))
+        if(!userRepo.existsById(userNew.getUsername())) {
+            System.out.println("2");
             throw new IllegalArgumentException("ERROR 400: Cannot modify a non existant user");
+        }
 
-        if(userRepo.existsById(username))
+        if(!userRepo.existsById(username)) {
+            System.out.println("3");
             throw new IllegalArgumentException("ERROR 404: User not found");
+        }
 
+        System.out.println("4");
         return userRepo.save(userNew);
     }
 
