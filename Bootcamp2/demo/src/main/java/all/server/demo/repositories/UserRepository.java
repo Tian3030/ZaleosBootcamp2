@@ -10,4 +10,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User,String> {
     List<User> findByName(String name);
     List<User> findByHeader(String header);
+    List<User> findByFollowers(Integer followers);
+    List<User> findByFollowed(Integer followed);
 }
