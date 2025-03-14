@@ -15,10 +15,6 @@ public class UsersController {
     @Autowired
     private UserRepository userRepo;
 
-//    public UsersController(UserRepository userRepo){
-//        this.userRepo = userRepo;
-//    }
-
     @PostMapping
     public User createUser(@RequestBody User user) {
         if (userRepo.existsById(user.getUsername()))
@@ -34,44 +30,61 @@ public class UsersController {
             return userRepo.save(user);
     }
 
+    //GET method for the 'users' resource.
+    //Takes the users id (username) from the URL.
+    //Returns the user that matches the given username from the database.
+    //Error Control:
+    //      - A non-existent user cannot be modified.
     @GetMapping("/{username}")
     public User getUser(@PathVariable String username) {
-        return userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 400: User not found"));
+        return userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 404: User not found"));
     }
 
+    //GET method for the 'users' resource.
+    //Can have query parameters for better filtering.
+    //Returns the user that matches the given username from the database.
+    //Error Control:
+    //      - A non-existent user cannot be modified.
     @GetMapping
-    public List<User> getUsers() {
-        return userRepo.findAll();
+    public List<User> getUsers(@RequestParam(required = false, defaultValue = "") String name,
+                               @RequestParam(required = false, defaultValue = "") String header) {
+        if(!name.isEmpty())
+            return userRepo.findByName(name);
+        else if(!header.isEmpty())
+            return userRepo.findByHeader(header);
+        else
+            return userRepo.findAll();
     }
 
+    //DELETE method for the 'users' resource.
+    //Takes the users id (username) from the URL.
+    //Deletes the user that matches the given username from the database.
+    //Error Control:
+    //      - A non-existent user cannot be deleted.
     @DeleteMapping("/{username}")
     public void deleteUser(@PathVariable String username) {
 
         if (!userRepo.existsById(username))
-            throw new IllegalArgumentException("ERROR 400: User does not exist");
+            throw new IllegalArgumentException("ERROR 404: User not found");
 
         userRepo.deleteById(username);
     }
 
+    //PUT method for the 'users' resource.
+    //Takes the users id (username) from the URL and the new attributes from the request body.
+    //Changes whole information of they requested user except their id (username).
+    //Error Control:
+    //      - A non-existent user cannot be modified.
+    //      - The id of the user (username) has to be the same in the URL and in the request body.
     @PutMapping("/{username}")
     public User editUser(@PathVariable String username, @RequestBody User userNew) {
-        System.out.println("ENTRO A PUT");
-        if(!userNew.getUsername().equals(username)) {
-            System.out.println("1");
-            throw new IllegalArgumentException("ERROR 400: Username missmatch");
-        }
 
-        if(!userRepo.existsById(userNew.getUsername())) {
-            System.out.println("2");
-            throw new IllegalArgumentException("ERROR 400: Cannot modify a non existant user");
-        }
-
-        if(!userRepo.existsById(username)) {
-            System.out.println("3");
+        if(!userRepo.existsById(username))
             throw new IllegalArgumentException("ERROR 404: User not found");
-        }
 
-        System.out.println("4");
+        if(!userNew.getUsername().equals(username))
+            throw new IllegalArgumentException("ERROR 400: Username missmatch");
+
         return userRepo.save(userNew);
     }
 
