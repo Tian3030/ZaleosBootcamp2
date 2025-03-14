@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class User {
 
     @Id
-    private String username; //@manolo, funcionara como id
+    private String username;
 
     private String name;
     private String header;
 
-    public User(String username, String name, String header) throws IllegalArgumentException{
+    public User(String username, String name, String header){
         this.name = name;
         this.username = username;
         this.header = header == null ? "" : header;
