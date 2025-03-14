@@ -1,6 +1,7 @@
 package all.server.demo.controller;
 
 import all.server.demo.repositories.CommentRepository;
+import all.server.demo.repositories.PostRepository;
 import all.server.demo.repositories.UserRepository;
 import all.server.demo.restobjets.Comment;
 
@@ -19,12 +20,18 @@ public class CommentsController {
     @Autowired
     private UserRepository userRepo;
 
+    @Autowired
+    private PostRepository postRepo;
+
     @PostMapping
     public Comment createComment (@RequestBody Comment comment){
 
         System.out.println(comment.getUsername());
 
-        if(comment.getComment().length() <= 0 || comment.getComment().length() > 255){
+        if(!postRepo.existsById(comment.getIdPost())){
+            throw new IllegalArgumentException("Post does not exist");
+        }
+        else if(comment.getComment().length() <= 0 || comment.getComment().length() > 255){
             throw new IllegalArgumentException("Comment size not allowed");
         }
         else if(!userRepo.existsById(comment.getUsername())){
@@ -32,12 +39,6 @@ public class CommentsController {
         }
         else{return commentRepo.save(comment);}
         }
-
-    
-    @GetMapping("/{comment_id}")
-    public Comment getComment (@PathVariable Long comment_id){
-        return commentRepo.findById(comment_id).orElseThrow(() -> new IllegalArgumentException("Comment not found"));
-    }
 
     /*
      * GETS ALL THE COMMENTS. YOU CAN ALSO FILTER PER idPost ASSIGNED WITH THE ARGUMENT
@@ -49,6 +50,10 @@ public class CommentsController {
         return commentRepo.findByIdPost(idPost);
     }
 
+    @GetMapping("/{comment_id}")
+    public Comment getComment (@PathVariable Long comment_id){
+        return commentRepo.findById(comment_id).orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+    }
 
     @DeleteMapping("/{comment_id}")
     public void deleteUser (@PathVariable Long comment_id){
