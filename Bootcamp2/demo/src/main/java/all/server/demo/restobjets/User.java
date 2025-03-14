@@ -16,14 +16,22 @@ public class User {
 
     private String name;
     private String header;
+    private Integer followers;
+    private Integer followed;
 
-    public User(String username, String name, String header){
+    public User(String username, String name, String header, Integer followers, Integer followed){
         this.name = name;
         this.username = username;
         this.header = header == null ? "" : header;
+        this.followers = followers == null ? 0 : followers;
+        this.followed = followed == null ? 0 : followed;
     }
 
     public User(){
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getHeader() {
@@ -34,10 +42,6 @@ public class User {
         this.header = header;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public String getName() {
         return name;
     }
@@ -46,5 +50,20 @@ public class User {
         this.name = name;
     }
 
+    public Integer getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Integer followed) {
+        this.followed = followed;
+    }
+
+    public Integer getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Integer followers) {
+        this.followers = followers;
+    }
 }
 
