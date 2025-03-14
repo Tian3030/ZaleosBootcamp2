@@ -15,6 +15,13 @@ public class UsersController {
     @Autowired
     private UserRepository userRepo;
 
+    //POST method for the 'users' resource.
+    //Takes the users attributes from the request body.
+    //Creates a new user with the attributes obtained, stores it in the database and returns it.
+    //Error Control:
+    //      - Cannot create a new user with the same id (username) as an existent user.
+    //      - The id of the user (username) must be at least 4 characters long.
+    //      - The name of the user must be at least 4 characters long.
     @PostMapping
     public User createUser(@RequestBody User user) {
         if (userRepo.existsById(user.getUsername()))
@@ -26,32 +33,39 @@ public class UsersController {
         else if (user.getName().length() < 4)
             throw new IllegalArgumentException("ERROR 400: Name too short");
 
-        else
+        else {
+            user.setFollowers(0);
+            user.setFollowed(0);
             return userRepo.save(user);
+        }
     }
 
     //GET method for the 'users' resource.
     //Takes the users id (username) from the URL.
     //Returns the user that matches the given username from the database.
     //Error Control:
-    //      - A non-existent user cannot be modified.
+    //      - Cannot search for a non-existent user.
     @GetMapping("/{username}")
     public User getUser(@PathVariable String username) {
         return userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 404: User not found"));
     }
 
     //GET method for the 'users' resource.
-    //Can have query parameters for better filtering.
+    //Can have query parameters for better filtering and are obtained by the URL.
     //Returns the user that matches the given username from the database.
-    //Error Control:
-    //      - A non-existent user cannot be modified.
     @GetMapping
     public List<User> getUsers(@RequestParam(required = false, defaultValue = "") String name,
-                               @RequestParam(required = false, defaultValue = "") String header) {
+                               @RequestParam(required = false, defaultValue = "") String header,
+                               @RequestParam(required = false) Integer followers,
+                               @RequestParam(required = false) Integer followed) {
         if(!name.isEmpty())
             return userRepo.findByName(name);
         else if(!header.isEmpty())
             return userRepo.findByHeader(header);
+        else if(followers != null)
+            return userRepo.findByFollowers(followers);
+        else if(followed != null)
+            return userRepo.findByFollowed(followed);
         else
             return userRepo.findAll();
     }
@@ -83,30 +97,29 @@ public class UsersController {
             throw new IllegalArgumentException("ERROR 404: User not found");
 
         if(!userNew.getUsername().equals(username))
-            throw new IllegalArgumentException("ERROR 400: Username missmatch");
+            throw new IllegalArgumentException("ERROR 400: Username mismatch");
 
         return userRepo.save(userNew);
     }
 
-//    @PatchMapping("/{username}")
-//    public User editName (@PathVariable String username, @RequestBody User userNew){
-//
-//        User userOld = userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 400: User not found"));
-//
-//        if(userNew.getName() != null) {
-//            if (userNew.getName() == null || userNew.getName().isBlank())
-//                throw new IllegalArgumentException("ERROR 400: Unable to modify the users name, please provide a valid name");
-//            userOld.setName(userNew.getName());
-//        }
-//
-//        if(userNew.getHeader() != null) {
-//            userOld.setHeader(userNew.getHeader());
-//        }
-//
-//        if(userNew.getPosts() != null){
-//            userOld.getPosts().addAll(userNew.getPosts());
-//        }
-//
-//        return userRepo.save(userOld);
-//    }
+    //PATCH method for the 'users' resource.
+    //Takes the users id (username) from the URL and the new attributes from the request body.
+    //It only changes the number of followers and followed
+    //Error Control:
+    //      - A non-existent user cannot be modified.
+    @PatchMapping("/{username}")
+    public User editName (@PathVariable String username, @RequestBody User userNew){
+
+        User userOld = userRepo.findById(username).orElseThrow(() -> new IllegalArgumentException("ERROR 404: User not found"));
+
+        if(userNew.getFollowers() != null) {
+            userOld.setFollowers(userNew.getFollowers());
+        }
+
+        if(userNew.getFollowed() != null) {
+            userOld.setFollowed(userNew.getFollowed());
+        }
+
+        return userRepo.save(userOld);
+    }
 }
