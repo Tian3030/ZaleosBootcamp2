@@ -19,12 +19,12 @@ public class User {
     private Integer followers;
     private Integer followed;
 
-    public User(String username, String name, String header, Integer followers, Integer followed){
+    public User(String username, String name, String header){
         this.name = name;
         this.username = username;
         this.header = header == null ? "" : header;
-        this.followers = followers == null ? 0 : followers;
-        this.followed = followed == null ? 0 : followed;
+        this.followers = 0;
+        this.followed = 0;
     }
 
     public User(){
