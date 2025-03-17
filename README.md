@@ -146,12 +146,12 @@ Done by sending POST requests including as JSON data the following example's att
 Comment: {
     "username": "jamie77",
     "comment": "Enjoying a great rugby match with friends",
-    "idPost":0
+    "idPost":1
 }
 ```
 Curl example:
 ```bash
-curl -X POST http://localhost:8080/api/comments -H "Content-Type: application/json" -d '{"username": "jamie77","comment": "Enjoying a great rugby match with friends","idPost":0}'
+curl -X POST http://localhost:8080/api/comments -H "Content-Type: application/json" -d '{"username": "jamie77","comment": "Enjoying a great rugby match with friends","idPost":1}'
 ```
 
 **Comment Listing** 
