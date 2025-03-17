@@ -179,5 +179,5 @@ To delete a specific comment, we can access the comment's resource and send a DE
 
 Curl example:
 ```bash
-curl -X DELETE http://localhost:8080/api/comments/1'
+curl -X DELETE http://localhost:8080/api/comments/1
 ```
