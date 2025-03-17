@@ -1,11 +1,8 @@
 package all.server.demo.restobjets;
 
-import all.server.demo.repositories.UserRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "USERS")

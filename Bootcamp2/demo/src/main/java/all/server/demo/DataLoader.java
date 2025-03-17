@@ -3,20 +3,28 @@ package all.server.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import all.server.demo.repositories.*;
+import all.server.demo.restobjets.Comment;
+import all.server.demo.restobjets.Post;
 import all.server.demo.restobjets.User;
 
 @Component
 public class DataLoader {
 
     private UserRepository userRepository;
+    private PostRepository postRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    public DataLoader(UserRepository userRepository) {
+    public DataLoader(UserRepository userRepository, PostRepository postRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
+        this.postRepository=postRepository;
+        this.commentRepository = commentRepository;
         LoadUsers();
     }
 
     private void LoadUsers() {
+
+        //USER GENERATION
         userRepository.save(new User("yaGOD", "YagoGamer", "Me gusta el hardware y el opensource"));
         userRepository.save(new User("juanP90", "Juan Pérez", "Apasionado por la tecnología y los videojuegos."));
         userRepository.save(new User("mariaG23", "María Gómez", "Amo la fotografía y los viajes."));
@@ -127,6 +135,131 @@ public class DataLoader {
         userRepository.save(new User("celesteC", "Celeste Castro", "Artista digital y fan del arte conceptual."));
         userRepository.save(new User("matiasV", "Matías Vega", "Deportista y entrenador de alto rendimiento."));
 
+        //POST GENERATION
+        postRepository.save(new Post("yaGOD", "Me encanta el nuevo gadget de tecnología, ¿alguien más lo tiene?", 50, 10));
+        postRepository.save(new Post("juanP90", "¡Hoy estuve en una exposición de fotografía increíble!", 75, 20));
+        postRepository.save(new Post("mariaG23", "Acabo de terminar de leer un libro sobre inteligencia artificial, ¡muy recomendable!", 100, 30));
+        postRepository.save(new Post("carlosG07", "La naturaleza es un lugar tan mágico para hacer senderismo, ¡me encanta!", 80, 25));
+        postRepository.save(new Post("luciF_87", "Hoy estuve practicando nuevos platillos en la cocina, ¡definitivamente lo haré más seguido!", 60, 15));
+        postRepository.save(new Post("anaTorres", "Diseñé un logo para una marca local, ¡me siento tan orgullosa del resultado!", 120, 40));
+        postRepository.save(new Post("pedroL_99", "¡Increíble partido de fútbol hoy, uno de los mejores partidos de la temporada!", 90, 35));
+        postRepository.save(new Post("sofiaR10", "No puedo esperar para ver la nueva película de ciencia ficción que sale este fin de semana", 110, 50));
+        postRepository.save(new Post("diegoMdz", "¡Acabo de hacer mi primer tatuaje! Estoy tan feliz con el resultado", 130, 60));
+        postRepository.save(new Post("elenaRojas", "El diseño de interiores de mi casa está quedando espectacular, ¡estoy muy contenta!", 70, 20));
+        postRepository.save(new Post("fernandoC", "Hoy empecé a aprender a tocar piano, ¡un paso más en mi camino musical!", 95, 45));
+        postRepository.save(new Post("aliciaMora", "¿Alguien más tiene una colección de videojuegos retro? ¡Yo no puedo dejar de coleccionarlos!", 85, 10));
+        postRepository.save(new Post("raulQ92", "He estado trabajando en un proyecto de ciencia de datos, ¡es tan emocionante ver los resultados!", 140, 30));
+        postRepository.save(new Post("lauraB87", "¡No hay nada como la música electrónica para comenzar bien el día!", 110, 55));
+        postRepository.save(new Post("jorgeVel", "Estoy escribiendo una nueva historia de ciencia ficción, ¿alguien tiene recomendaciones para inspirarme?", 125, 45));
+        postRepository.save(new Post("daniMart", "Hoy estuve explorando una nueva ruta para hacer senderismo, ¡espectacular!", 95, 25));
+        postRepository.save(new Post("nataliaR", "¡Me encantan las películas de terror! ¿Alguien tiene alguna recomendación?", 80, 15));
+        postRepository.save(new Post("oscarG_77", "Estuve aprendiendo sobre arquitectura moderna, ¡es un tema fascinante!", 105, 40));
+        postRepository.save(new Post("claudiaS", "Hice una receta nueva para postres hoy, ¡quedó deliciosa!", 55, 10));
+        postRepository.save(new Post("marioLop", "Siempre he sido un gran fan de la fotografía nocturna, ¡es un desafío divertido!", 90, 20));
+        postRepository.save(new Post("andreaC", "Finalmente terminé de escribir mi primer guion de cine, ¡estoy muy emocionado por mostrarlo!", 130, 60));
+        postRepository.save(new Post("pabloFz", "El cine clásico siempre tendrá un lugar especial en mi corazón, ¿cuál es tu película favorita?", 120, 50));
+        postRepository.save(new Post("monicaH", "Hoy aprendí un montón sobre ciberseguridad, ¡es un campo increíble!", 100, 30));
+        postRepository.save(new Post("gustavoT", "Estoy escribiendo un artículo sobre tecnología y me gustaría saber sus opiniones", 110, 40));
+        postRepository.save(new Post("evaNunez", "Me encanta la moda y el arte, ¿algún consejo para combinar estilos?", 95, 25));
+        postRepository.save(new Post("rubenG_89", "Este año empiezo un nuevo proyecto sobre IA y machine learning, ¡estoy emocionado!", 130, 50));
+        postRepository.save(new Post("beatrizM", "Me encanta la jardinería y hoy planté algunas flores, ¡es tan relajante!", 80, 30));
+        postRepository.save(new Post("sergioB", "Fotografiar bodas es uno de mis mayores placeres, ¡qué experiencia tan especial!", 100, 35));
+        postRepository.save(new Post("valeriaC", "Hoy hice una caminata por la ciudad y descubrí nuevos rincones, ¡me encanta explorar!", 90, 20));
+        postRepository.save(new Post("robertoZ", "Trabajo en un nuevo proyecto de datos, ¡esperamos hacer cosas muy interesantes!", 110, 60));
+        postRepository.save(new Post("karlaHern", "Estoy creando contenido sobre moda, ¡me encantaría saber qué piensan de mis outfits!", 120, 50));
+        postRepository.save(new Post("joaquinM", "Soy fanático de las startups, ¿cuáles me recomiendan?", 105, 40));
+        postRepository.save(new Post("patriciaS", "Hoy estuve en el museo, ¡siempre me sorprende la historia que se guarda allí!", 80, 30));
+        postRepository.save(new Post("alejandroQ", "La tecnología y el deporte son mi pasión, ¡siempre busco combinarlos!", 90, 25));        
+        
+        //COMMENTS CREATION
+        commentRepository.save(new Comment("yaGOD", "¡Este gadget está increíble! Me gustaría tenerlo.", 1L));
+        commentRepository.save(new Comment("pedroL_99", "¡Lo tengo! Es genial, ¿cómo lo usas tú?", 1L));
+        commentRepository.save(new Comment("sofiaR10", "Aún no lo tengo, pero estoy pensando en comprarlo.", 1L));
+        
+        commentRepository.save(new Comment("mariaG23", "¡La exposición fue impresionante! ¿Qué fotos más te gustaron?", 2L));
+        commentRepository.save(new Comment("daniMart", "Me encantaría ir la próxima vez. ¡Estoy buscando nuevas exposiciones!", 2L));
+        
+        commentRepository.save(new Comment("fernandoC", "¡Acabo de leerlo también! Muy interesante, ¿qué tema de IA te pareció más fascinante?", 3L));
+        commentRepository.save(new Comment("elenaRojas", "Voy a empezar a leerlo, gracias por la recomendación.", 3L));
+        commentRepository.save(new Comment("raulQ92", "Definitivamente lo leeré, ¡suena muy bien!", 3L));
+        
+        commentRepository.save(new Comment("jorgeVel", "¡Totalmente! La naturaleza tiene una magia especial.", 4L));
+        commentRepository.save(new Comment("beatrizM", "Yo también soy fan del senderismo, ¿has visitado algún otro lugar increíble?", 4L));
+        commentRepository.save(new Comment("pabloFz", "¡Me encanta la naturaleza! Este fin de semana tengo planeado hacer una ruta.", 4L));
+        
+        commentRepository.save(new Comment("marioLop", "¡Qué rico! Estoy seguro de que salió delicioso.", 5L));
+        commentRepository.save(new Comment("estebanP", "Lo intentaré también, siempre estoy buscando nuevas recetas.", 5L));
+        commentRepository.save(new Comment("andreaC", "¡Qué buena idea! Yo también quiero probarlo.", 5L));
+        
+        commentRepository.save(new Comment("raquelG", "¡Qué bonito el logo! Felicidades, se ve profesional.", 6L));
+        commentRepository.save(new Comment("gustavoT", "Es un excelente trabajo, me encantaría saber más sobre el proceso.", 6L));
+        
+        commentRepository.save(new Comment("santiagoQ", "¡Qué buen partido! Fue increíble ver cómo se jugó.", 7L));
+        commentRepository.save(new Comment("delfinaR", "Me gustaría ver el partido, ¿qué equipos jugaron?", 7L));
+        commentRepository.save(new Comment("rubenG_89", "¡Uno de los mejores partidos de la temporada! ¿Cómo estuvo el ambiente?", 7L));
+        
+        commentRepository.save(new Comment("fernandoC", "¡Totalmente de acuerdo! Ya estoy esperando su estreno.", 8L));
+        commentRepository.save(new Comment("claudiaS", "¡No puedo esperar! ¿De qué trata?", 8L));
+        
+        commentRepository.save(new Comment("elenaRojas", "¡Qué emocionante! ¿Dónde te lo hiciste?", 9L));
+        commentRepository.save(new Comment("pabloFz", "El tatuaje quedó genial, ¿te animarías a mostrarlo?", 9L));
+        commentRepository.save(new Comment("gustavoT", "¡Wow! El tatuaje debe ser impresionante.", 9L));
+        
+        commentRepository.save(new Comment("mariaG23", "¡Tu diseño es impresionante! Felicitaciones.", 10L));
+        commentRepository.save(new Comment("lauraB87", "Estoy pensando en rediseñar mi sala, ¿algún consejo?", 10L));
+        
+        commentRepository.save(new Comment("jorgeVel", "¡Qué emocionante! El piano es un instrumento increíble.", 11L));
+        commentRepository.save(new Comment("nataliaR", "Me encanta la música, ¿qué canción estás aprendiendo?", 11L));
+        
+        commentRepository.save(new Comment("raulQ92", "¡Qué genial! Yo también colecciono videojuegos retro.", 12L));
+        commentRepository.save(new Comment("sergioB", "Tengo una colección gigante de consolas antiguas, ¡qué bueno ver a otros con la misma pasión!", 12L));
+        
+        commentRepository.save(new Comment("sofiaR10", "¡Qué interesante proyecto! ¿Cómo lo estás desarrollando?", 13L));
+        commentRepository.save(new Comment("pedroL_99", "Me encanta todo lo relacionado con la ciencia de datos. ¿Qué has aprendido hasta ahora?", 13L));
+        
+        commentRepository.save(new Comment("marioLop", "¡Qué buena elección de música! También me encanta la electrónica.", 14L));
+        commentRepository.save(new Comment("daniMart", "¡Siempre es un buen día con música electrónica!", 14L));
+        
+        commentRepository.save(new Comment("gustavoT", "¡Qué emocionante! Soy fan de la ciencia ficción, ¿algún autor que recomiendes?", 15L));
+        commentRepository.save(new Comment("beatrizM", "¡Qué divertido! La ciencia ficción siempre da para buenas historias.", 15L));
+        
+        commentRepository.save(new Comment("raulM_80", "¡Qué increíble! ¿Qué ruta estás explorando?", 16L));
+        commentRepository.save(new Comment("claudiaS", "¡Siempre es un reto encontrar nuevas rutas!", 16L));
+        
+        commentRepository.save(new Comment("jorgeVel", "¡Las películas de terror son lo mejor! ¿Tienes alguna recomendación?", 17L));
+        commentRepository.save(new Comment("marioLop", "Me encantan las películas de terror, ¿cuál me recomiendas?", 17L));
+        
+        commentRepository.save(new Comment("aliciaMora", "¡La arquitectura moderna es fascinante! ¿Qué tipo de arquitectura estás aprendiendo?", 18L));
+        commentRepository.save(new Comment("gustavoT", "Es un tema impresionante, ¿qué arquitectos te inspiran?", 18L));
+        
+        commentRepository.save(new Comment("daniMart", "¡Se ve deliciosa! ¿Qué receta usaste?", 19L));
+        commentRepository.save(new Comment("jorgeVel", "¡Qué rico! Tengo que probarla también.", 19L));
+        
+        commentRepository.save(new Comment("lauraB87", "¡Qué desafío tan divertido! También me gusta la fotografía nocturna.", 20L));
+        commentRepository.save(new Comment("pedroL_99", "¡Genial! Yo siempre he querido intentarlo.", 20L));
+        
+        commentRepository.save(new Comment("sofiaR10", "¡Qué increíble! ¿De qué trata el guion?", 21L));
+        commentRepository.save(new Comment("gustavoT", "¡Qué emocionante! Estoy seguro de que será un éxito.", 21L));
+        
+        commentRepository.save(new Comment("gustavoT", "¡Las películas clásicas nunca pasarán de moda!", 22L));
+        commentRepository.save(new Comment("mariaG23", "¡Totalmente! Esas películas siempre tienen algo especial.", 22L));
+        
+        commentRepository.save(new Comment("pedroL_99", "¡Qué interesante! La ciberseguridad es un tema clave hoy en día.", 23L));
+        commentRepository.save(new Comment("nataliaR", "Definitivamente un tema muy relevante. ¿Qué aprendiste?", 23L));
+        
+        commentRepository.save(new Comment("sofiaR10", "¡El artículo de tecnología debe quedar increíble! ¿De qué trata?", 24L));
+        commentRepository.save(new Comment("fernandoC", "¡Es una gran idea! Me encantaría leerlo.", 24L));
+        
+        commentRepository.save(new Comment("raquelG", "¡Me encanta la moda! ¿Tienes alguna recomendación?", 25L));
+        commentRepository.save(new Comment("mariaG23", "¡Qué divertido! Estoy aprendiendo más sobre moda.", 25L));
+        
+        commentRepository.save(new Comment("pabloFz", "¡Qué emocionante! La IA y el machine learning siempre están avanzando.", 26L));
+        commentRepository.save(new Comment("gustavoT", "Es increíble cómo la IA está cambiando todo, ¿qué enfoque tienes?", 26L));
+        
+        commentRepository.save(new Comment("raulQ92", "¡Me encanta la jardinería! ¿Qué plantas sembraste?", 27L));
+        
+        
     }
+
 
 }
