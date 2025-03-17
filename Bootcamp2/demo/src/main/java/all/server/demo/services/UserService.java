@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepo;
 
     @Autowired
-    public UserServices(UserRepository userRepository){
+    public UserService(UserRepository userRepository){
         userRepo = userRepository;
     }
 
