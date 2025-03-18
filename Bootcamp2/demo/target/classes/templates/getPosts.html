@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Zapi</title>
+</head>
+<body>
+<h1>Posts Information</h1>
+
+<ul>
+    <li th:each="post : ${posts}">
+        <p th:text="|${post.description}|"></p>
+        <p th:text="|by ${post.username}|"></p>
+        <p th:text="|Likes: ${post.likes}       Reposts: ${post.shares}|"></p>
+    </li>
+</ul>
+
+</body>
+</html>

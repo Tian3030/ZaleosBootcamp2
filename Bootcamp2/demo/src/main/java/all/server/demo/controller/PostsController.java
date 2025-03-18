@@ -4,11 +4,13 @@ import all.server.demo.restobjets.Post;
 import all.server.demo.services.PostsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/posts")
 public class PostsController {
 
@@ -21,8 +23,9 @@ public class PostsController {
  * Returns the created post object or throws an error if the post cannot be created.
  */
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
-        return postsService.createPost(post);
+    public String createPost(@RequestBody Post post, Model model) {
+        model.addAttribute("post", postsService.createPost(post));
+        return "postPost";
     }
 
 /*
@@ -32,8 +35,9 @@ public class PostsController {
  *  Returns a list of posts.
  */
     @GetMapping
-    public List<Post> getPosts(@RequestParam(required = false) String username) {
-        return postsService.getPosts(username);
+    public String getPosts(@RequestParam(required = false) String username, Model model) {
+        model.addAttribute("posts", postsService.getPosts(username));
+        return "getPosts";
     }
 /*
  * Endpoint: GET /api/posts/{idPost}
@@ -41,8 +45,9 @@ public class PostsController {
  * Returns the post object.
  */
     @GetMapping("/{idPost}")
-    public Post getPost(@PathVariable Long idPost) {
-        return postsService.getPost(idPost);
+    public String getPost(@PathVariable Long idPost, Model model) {
+        model.addAttribute("post", postsService.getPost(idPost));
+        return "getPost";
     }
 
 /*
@@ -51,8 +56,9 @@ public class PostsController {
  * Returns the deleted post object. Throws an error if the post cannot be found.
  */
     @DeleteMapping("/{idPost}")
-    public Post deletePost(@PathVariable Long idPost) {
-       return postsService.deletePost(idPost);
+    public String deletePost(@PathVariable Long idPost, Model model) {
+        model.addAttribute("post", postsService.deletePost(idPost));
+        return "deletePost";
     }
 
 /*
@@ -61,8 +67,9 @@ public class PostsController {
  * Returns the updated post object with incremented likes. Throws an error if the post cannot be found.
  */
     @GetMapping("/{idPost}/like")
-    public Post likePost(@PathVariable Long idPost) {
-        return postsService.likePost(idPost);
+    public String likePost(@PathVariable Long idPost, Model model) {
+        model.addAttribute("post", postsService.likePost(idPost));
+        return "putPost";
     }
 /*
  * Endpoint: GET /api/posts/{idPost}/dislike
@@ -70,8 +77,9 @@ public class PostsController {
  * Returns the updated post object with decremented likes. Throws an error if the post cannot be found.
  */
     @GetMapping("/{idPost}/dislike")
-    public Post dislikePost(@PathVariable Long idPost) {
-        return postsService.dislikePost(idPost);
+    public String dislikePost(@PathVariable Long idPost, Model model) {
+        model.addAttribute("post", postsService.dislikePost(idPost));
+        return "putPost";
     }
 
 /*
@@ -80,8 +88,9 @@ public class PostsController {
  * Returns the updated post object with incremented shares. Throws an error if the post cannot be found.
  */
     @GetMapping("/{idPost}/share")
-    public Post sharePost(@PathVariable Long idPost) {
-        return postsService.sharePost(idPost);
+    public String sharePost(@PathVariable Long idPost, Model model) {
+        model.addAttribute("post", postsService.sharePost(idPost));
+        return "putPost";
     }
 /*
  * Endpoint: GET /api/posts/{idPost}/unshare
@@ -89,7 +98,8 @@ public class PostsController {
  * Returns the updated post object with decremented shares. Throws an error if the post cannot be found.
  */
     @GetMapping("/{idPost}/unshare")
-    public Post unsharePost(@PathVariable Long idPost) {
-        return postsService.unsharePost(idPost);
+    public String unsharePost(@PathVariable Long idPost, Model model) {
+        model.addAttribute("post", postsService.unsharePost(idPost));
+        return "putPost";
     }
 }

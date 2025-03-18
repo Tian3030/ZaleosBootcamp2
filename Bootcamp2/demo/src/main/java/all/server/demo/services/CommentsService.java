@@ -56,7 +56,7 @@ public class CommentsService {
     }
 
     //Deletes a comment by its comment_id.
-    public Comment deleteUser(Long comment_id) {
+    public Comment deleteComment(Long comment_id) {
         Comment comment = commentRepo.findById(comment_id).orElseThrow(() -> new IllegalArgumentException("ERROR 404: Comment not found."));
         commentRepo.deleteById(comment_id);
         return comment;

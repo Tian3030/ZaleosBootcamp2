@@ -1,0 +1,15 @@
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/DataLoader.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/DemoApplication.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/ExceptionHandler.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/controller/CommentsController.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/controller/PostsController.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/controller/UsersController.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/repositories/CommentRepository.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/repositories/PostRepository.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/repositories/UserRepository.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/restobjets/Comment.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/restobjets/Post.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/restobjets/User.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/services/CommentsService.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/services/PostsService.java
+/home/zaleos/IdeaProjects/ZaleosBootcamp2/Bootcamp2/demo/src/main/java/all/server/demo/services/UserService.java
