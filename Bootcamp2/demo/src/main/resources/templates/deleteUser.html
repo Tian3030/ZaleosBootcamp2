@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Zapi</title>
+    <pre>
+███████╗ █████╗ ██████╗ ██╗
+╚══███╔╝██╔══██╗██╔══██╗██║
+  ███╔╝ ███████║██████╔╝██║
+ ███╔╝  ██╔══██║██╔═══╝ ██║
+███████╗██║  ██║██║     ██║
+╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
+    </pre>
 </head>
 <body>
 <h1>Deleted User Information</h1>
-<p th:text="|Username: ${user.username}|"></p>
-<p th:text="|Name: ${user.name}|"></p>
-<p th:text="|Header: ${user.header}|"></p>
-<p th:text="|Number of followers: ${user.followers}|"></p>
-<p th:text="|Number of people followed: ${user.followed}|"></p>
+<p th:text="|${user.name}&emsp;@${user.username}|"></p>
+<img src="https://localhost:8080/api/image/${user.username}" alt="Couldn't load image">
+<p th:text="|About me: ${user.header}|"></p>
+<p th:text="|Followers: ${user.followers}&emsp;Followed: ${user.followed}|"></p>
 </body>
 </html>
