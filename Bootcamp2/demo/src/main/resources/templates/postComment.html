@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Zapi</title>
+    <pre>
+███████╗ █████╗ ██████╗ ██╗
+╚══███╔╝██╔══██╗██╔══██╗██║
+  ███╔╝ ███████║██████╔╝██║
+ ███╔╝  ██╔══██║██╔═══╝ ██║
+███████╗██║  ██║██║     ██║
+╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
+    </pre>
 </head>
 <body>
 <h1>Post's New Comment Information</h1>
 <p th:text="|${post.description}|"></p>
 <p th:text="|by ${post.username}|"></p>
-<p th:text="|Likes: ${post.likes}       Reposts: ${post.shares}|"></p>
+<p th:text="|Likes: ${post.likes}&emsp;Reposts: ${post.shares}|"></p>
 <p th:text="|---------------------------------------------|"></p>
 <p th:text="|${comment.comment}|"></p>
 <p th:text="|by ${comment.username}|"></p>
