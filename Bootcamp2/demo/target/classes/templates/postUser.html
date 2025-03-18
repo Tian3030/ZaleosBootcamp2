@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Zapi</title>
+</head>
+<body>
+<h1>New User Information</h1>
+<p th:text="|Username: ${user.username}|"></p>
+<p th:text="|Name: ${user.name}|"></p>
+<p th:text="|Header: ${user.header}|"></p>
+<p th:text="|Number of followers: ${user.followers}|"></p>
+<p th:text="|Number of people followed: ${user.followed}|"></p>
+</body>
+</html>
