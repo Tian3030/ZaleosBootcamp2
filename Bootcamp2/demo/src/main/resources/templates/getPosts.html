@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Zapi</title>
+    <pre>
+███████╗ █████╗ ██████╗ ██╗
+╚══███╔╝██╔══██╗██╔══██╗██║
+  ███╔╝ ███████║██████╔╝██║
+ ███╔╝  ██╔══██║██╔═══╝ ██║
+███████╗██║  ██║██║     ██║
+╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
+    </pre>
 </head>
 <body>
 <h1>Posts Information</h1>
@@ -11,7 +19,7 @@
     <li th:each="post : ${posts}">
         <p th:text="|${post.description}|"></p>
         <p th:text="|by ${post.username}|"></p>
-        <p th:text="|Likes: ${post.likes}       Reposts: ${post.shares}|"></p>
+        <p th:text="|Likes: ${post.likes}&emsp;Reposts: ${post.shares}|"></p>
     </li>
 </ul>
 
