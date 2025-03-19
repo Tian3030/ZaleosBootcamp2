@@ -3,25 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Zapi</title>
-    <pre>
-███████╗ █████╗ ██████╗ ██╗
-╚══███╔╝██╔══██╗██╔══██╗██║
-  ███╔╝ ███████║██████╔╝██║
- ███╔╝  ██╔══██║██╔═══╝ ██║
-███████╗██║  ██║██║     ██║
-╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
-    </pre>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Posts Information</h1>
 
-<ul>
-    <li th:each="post : ${posts}">
-        <p th:text="|${post.description}|"></p>
-        <p th:text="|by ${post.username}|"></p>
-        <p th:text="|Likes: ${post.likes}&emsp;Reposts: ${post.shares}|"></p>
-    </li>
-</ul>
+    <h1>Posts Information</h1>
+
+    <ul>
+        <li th:each="post : ${posts}">
+            <p th:text="|${post.description}|"></p>
+            <p th:text="|by ${post.username}|"></p>
+            <p th:text="|Likes: ${post.likes}       Reposts: ${post.shares}|"></p>
+            <a th:href="@{http://localhost:8080/api/comments?idPost={idPost}(idPost=${post.idPost})}" class="button">View Post</a>
+        </li>
+    </ul>
 
 </body>
 </html>

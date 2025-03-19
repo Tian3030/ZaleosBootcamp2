@@ -2,14 +2,189 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Zapi</title>
+    <title>Zapi - Social Network</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Section */
+        header {
+            width: 100%;
+            background-color: #1877f2;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        header .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        header .nav input {
+            padding: 8px;
+            margin-right: 20px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+
+        /* Main Content Area */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 80px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        /* Content Section */
+        .content {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .user-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .user-info h1 {
+            text-align: center;
+            color: #1877f2;
+        }
+
+        .user-info p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .user-info .stat {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        .user-info .stat div {
+            text-align: center;
+        }
+
+        /* Button to view posts */
+        .posts-button {
+            display: block;
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+            font-size: 16px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .posts-button:hover {
+            background-color: #166fe5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1877f2;
+            color: white;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
-<h1>User Information</h1>
-<p th:text="|Username: ${user.username}|"></p>
-<img th:src="'http://localhost:8080/api/images/' + ${user.username}" alt="Couldn't load image" width="100" height="100"><p th:text="|Name: ${user.name}|"></p>
-<p th:text="|Header: ${user.header}|"></p>
-<p th:text="|Number of followers: ${user.followers}|"></p>
-<p th:text="|Number of people followed: ${user.followed}|"></p>
+    <!-- Header -->
+    <header>
+        <div class="logo">Zapi</div>
+        <div class="nav">
+            <!-- Search form -->
+            <form id="search-form" onsubmit="handleSearch(event)">
+                <input type="text" id="search-input" placeholder="Search for a user..." required>
+            </form>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Content Area -->
+        <div class="content">
+            <!-- User Info Section -->
+            <div class="user-info">
+                <h1>User Information</h1>
+                <img th:src="'http://localhost:8080/api/images/' + ${user.username}" alt="Profile Image" width="100" height="100">
+                <p th:text="|Username: ${user.username}|"></p>
+                <p th:text="|Name: ${user.name}|"></p>
+                <p th:text="|Header: ${user.header}|"></p>
+
+                <div class="stat">
+                    <div>
+                        <strong th:text="${user.followers}"></strong>
+                        <p>Followers</p>
+                    </div>
+                    <div>
+                        <strong th:text="${user.followed}"></strong>
+                        <p>Following</p>
+                    </div>
+                </div>
+
+                <!-- Button to View Posts -->
+                <a th:href="@{http://localhost:8080/api/posts?username={username}(username=${user.username})}" class="posts-button">View Posts</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Zapi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Handle search redirection
+        function handleSearch(event) {
+            event.preventDefault();  // Prevent form submission
+            const username = document.getElementById('search-input').value;  // Get the value from the search input
+            const searchUrl = `http://localhost:8080/api/users/${username}`;  // Create the URL with the username
+            window.location.href = searchUrl;  // Redirect to the new URL
+        }
+    </script>
 </body>
 </html>

@@ -13,9 +13,16 @@
     </pre>
 </head>
 <body>
-<h1>Post Information</h1>
+<h1>Post's Comments Information</h1>
 <p th:text="|${post.description}|"></p>
 <p th:text="|by ${post.username}|"></p>
 <p th:text="|Likes: ${post.likes}&emsp;Reposts: ${post.shares}|"></p>
+<p th:text="|---------------------------------------------|"></p>
+<ul>
+    <li th:each="comment : ${comments}">
+        <p th:text="|${comment.comment}|"></p>
+        <p th:text="|by ${comment.username}|"></p>
+    </li>
+</ul>
 </body>
 </html>
