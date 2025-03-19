@@ -2,145 +2,232 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" th:href="@{/images/img.png}">
     <title>Zapi - Social Network</title>
     <style>
-        /* General Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    @keyframes fancyEffect {
+        0% { transform: rotateX(0deg) scale(1); text-shadow: 0 0 5px blue, 0 0 10px blue; }
+        25% { transform: rotateX(20deg) scale(1.1); text-shadow: 0 0 10px blue, 0 0 15px blue; }
+        50% { transform: rotateX(0deg) scale(1); text-shadow: 0 0 5px blue, 0 0 10px blue; }
+        75% { transform: rotateX(-20deg) scale(1.1); text-shadow: 0 0 10px blue, 0 0 15px blue; }
+        100% { transform: rotateX(0deg) scale(1); text-shadow: 0 0 5px blue, 0 0 10px blue; }
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            color: #1c1e21;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    @keyframes delayZ {
+        0% { opacity: 0; transform: scale(0.5); }
+        100% { opacity: 1; transform: scale(1); }
+    }
 
-        /* Header Section */
-        header {
-            width: 100%;
-            background-color: #1877f2;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-        }
+    @keyframes glowing {
+        0% { text-shadow: 0 0 5px blue, 0 0 10px blue; }
+        50% { text-shadow: 0 0 20px blue, 0 0 30px blue; }
+        100% { text-shadow: 0 0 5px blue, 0 0 10px blue; }
+    }
 
-        header .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
+    @keyframes lightning {
+        0% { opacity: 0; transform: scale(0.5); }
+        25% { opacity: 1; transform: scale(1.2); text-shadow: 0 0 15px blue; }
+        50% { opacity: 1; transform: scale(1); text-shadow: 0 0 25px blue; }
+        100% { opacity: 1; transform: scale(1); text-shadow: 0 0 5px blue, 0 0 10px blue; }
+    }
 
-        header .nav {
-            display: flex;
-            align-items: center;
-        }
+    body {
+        background-color: white;
+        color: black;
+        font-family: monospace;
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        align-items: flex-start;
+    }
 
-        header .nav input {
-            padding: 8px;
-            margin-right: 20px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-        }
+    .logo-container {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
 
-        /* Main Content Area */
-        .main-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 80px;
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 20px;
-        }
+    .ascii-logo {
+        display: inline-block;
+        white-space: pre;
+        text-align: center;
+        font-size: 8px; /* Tamaño más pequeño para el logo */
+        line-height: 1;
+        animation: fancyEffect 3s infinite alternate ease-in-out;
+    }
 
-        /* Content Section */
-        .content {
-            width: 100%;
-            max-width: 800px;
-        }
+    .z-logo {
+        display: inline-block;
+        white-space: pre;
+        font-size: 14px; /* Tamaño más pequeño para la Z */
+        line-height: 1;
+        animation: lightning 1s ease-in-out forwards, glowing 1.5s infinite alternate;
+        opacity: 0;
+        animation-delay: 0.5s;
+        margin-right: 10px;
+    }
 
-        .user-info {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .user-info h1 {
-            text-align: center;
-            color: #1877f2;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f2f5;
+        color: #1c1e21;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        .user-info p {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
+    /* Header Section */
+    header {
+        width: 100%;
+        background-color: #1877f2;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+    }
 
-        .user-info img {
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-        }
+    header .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+    }
 
-        .user-info .stat {
-            display: flex;
-            justify-content: space-between;
-            font-size: 16px;
-            margin-top: 15px;
-            color: #555;
-        }
+    header .nav {
+        display: flex;
+        align-items: center;
+    }
 
-        .user-info .stat div {
-            text-align: center;
-        }
+    header .nav input {
+        padding: 8px;
+        margin-right: 20px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+    }
 
-        /* Button to view posts */
-        .posts-button {
-            display: block;
-            background-color: #1877f2;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-align: center;
-            width: 100%;
-            font-size: 16px;
-            text-decoration: none;
-            margin-top: 20px;
-        }
+    /* Main Content Area */
+    .main-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 80px;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 20px;
+    }
 
-        .posts-button:hover {
-            background-color: #166fe5;
-        }
+    /* Content Section */
+    .content {
+        width: 100%;
+        max-width: 800px;
+    }
 
-        /* Footer */
-        footer {
-            background-color: #1877f2;
-            color: white;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-        }
+    .user-info {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .user-info h1 {
+        text-align: center;
+        color: #1877f2;
+    }
+
+    .user-info p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .user-info img {
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+    .user-info .stat {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        margin-top: 15px;
+        color: #555;
+    }
+
+    .user-info .stat div {
+        text-align: center;
+    }
+
+    /* Button to view posts */
+    .posts-button {
+        display: block;
+        background-color: #1877f2;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        font-size: 16px;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+
+    .posts-button:hover {
+        background-color: #166fe5;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #1877f2;
+        color: white;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
 
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="logo">Zapi</div>
         <div class="nav">
             <!-- Search form -->
             <form id="search-form" onsubmit="handleSearch(event)">
                 <input type="text" id="search-input" placeholder="Search for a user..." required>
             </form>
+        </div>
+        <div class="logo-container">
+            <!-- Letra Z con efecto de "rayo" y brillo -->
+            <pre class="z-logo">
+
+
+ █████████
+░█░░░░███
+░   ███░
+  ███░   █
+ █████████
+░░░░░░░░░
+
+        </pre>
+
+            <!-- Resto del logo API -->
+            <pre class="ascii-logo">
+ █████╗ ██████╗ ██╗
+██╔══██╗██╔══██╗██║
+███████║██████╔╝██║
+██╔══██║██╔═══╝ ██║
+██║  ██║██║     ██║
+╚═╝  ╚═╝╚═╝     ╚═╝
+        </pre>
         </div>
     </header>
 
